@@ -1,0 +1,1 @@
+import{O as i,ka as e}from"./chunk-3W7JZN5X.js";var s=class t{music=e(!1);toggle(){this.music.set(!this.music())}get(){return this.music}static \u0275fac=function(c){return new(c||t)};static \u0275prov=i({token:t,factory:t.\u0275fac,providedIn:"root"})};export{s as a};
