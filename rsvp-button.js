@@ -4,9 +4,41 @@
 
   if (!guestId) return;
 
-  const href = "rsvp.html?guest=" + encodeURIComponent(guestId);
+  const rsvpUrl = new URL("rsvp.html", window.location.href);
+  rsvpUrl.search = "?guest=" + encodeURIComponent(guestId);
+  const href = rsvpUrl.href;
+  const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=12&data="
+    + encodeURIComponent(href);
   const styles = document.createElement("style");
   styles.textContent = `
+    #Qr qrcodecomponent,
+    #Qr QRCodeComponent {
+      display: none !important;
+    }
+
+    .simple-rsvp-panel {
+      display: grid;
+      justify-items: center;
+      gap: 14px;
+      width: 100%;
+      margin: 10px auto 0;
+    }
+
+    .simple-rsvp-qr {
+      display: block;
+      width: 180px;
+      height: 180px;
+      padding: 0;
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(45, 37, 39, 0.12);
+    }
+
+    .simple-rsvp-qr img {
+      display: block;
+      width: 180px;
+      height: 180px;
+    }
+
     .simple-rsvp-link,
     .simple-rsvp-inline {
       align-items: center;
@@ -39,11 +71,12 @@
     .simple-rsvp-inline {
       display: flex;
       width: min(84%, 280px);
-      margin: 14px auto 0;
+      margin: 0 auto;
     }
 
     .simple-rsvp-link:focus-visible,
-    .simple-rsvp-inline:focus-visible {
+    .simple-rsvp-inline:focus-visible,
+    .simple-rsvp-qr:focus-visible {
       outline: 3px solid #fff;
       outline-offset: 3px;
     }
@@ -69,11 +102,45 @@
     return link;
   }
 
+  function createQrPanel() {
+    const panel = document.createElement("div");
+    const qrLink = document.createElement("a");
+    const qrImage = document.createElement("img");
+
+    panel.className = "simple-rsvp-panel";
+    qrLink.className = "simple-rsvp-qr";
+    qrLink.href = href;
+    qrLink.setAttribute("aria-label", "Open RSVP page");
+    qrImage.src = qrUrl;
+    qrImage.alt = "RSVP QR code";
+    qrImage.width = 180;
+    qrImage.height = 180;
+
+    qrLink.appendChild(qrImage);
+    panel.appendChild(qrLink);
+    panel.appendChild(createLink("simple-rsvp-inline"));
+    return panel;
+  }
+
+  function removeOldInline() {
+    document.querySelectorAll(".simple-rsvp-inline, .simple-rsvp-panel, .simple-rsvp-link").forEach((element) => {
+      element.remove();
+    });
+  }
+
   function mountButton(attempt) {
     const qrSection = document.getElementById("Qr");
 
-    if (qrSection && !document.querySelector(".simple-rsvp-inline")) {
-      qrSection.appendChild(createLink("simple-rsvp-inline"));
+    if (qrSection && !document.querySelector(".simple-rsvp-panel")) {
+      removeOldInline();
+      const firstCanvas = qrSection.querySelector("canvas");
+      const panel = createQrPanel();
+
+      if (firstCanvas && firstCanvas.parentElement) {
+        firstCanvas.parentElement.insertAdjacentElement("afterend", panel);
+      } else {
+        qrSection.appendChild(panel);
+      }
       return;
     }
 
@@ -87,5 +154,24 @@
     }
   }
 
-  window.addEventListener("load", () => mountButton(0));
+  function watchForQrSection() {
+    const observer = new MutationObserver(() => {
+      if (document.getElementById("Qr")) {
+        mountButton(0);
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    window.setTimeout(() => observer.disconnect(), 20000);
+  }
+
+  window.addEventListener("load", () => {
+    mountButton(0);
+    watchForQrSection();
+  });
 })();
