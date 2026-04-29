@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   var __defProp = Object.defineProperty;
   var __getOwnPropNames = Object.getOwnPropertyNames;
   var __defNormalProp = (obj, key2, value2) => key2 in obj ? __defProp(obj, key2, { enumerable: true, configurable: true, writable: true, value: value2 }) : obj[key2] = value2;
@@ -11606,11 +11606,11 @@ ${n.map((r2, o3) => `${o3 + 1}) ${r2.toString()}`).join(`
         }
         decline(t7) {
           if (typeof window < "u" && window.GUEST_API_URL) return this.guestApi("action=decline&guest=" + encodeURIComponent(new URLSearchParams(window.location.search).get("guest") || t7));
-          return this.http.put(`${o}SubformPedidosInvitado/${t7}`, { cbNvStatusConfirmacion: "Declinado" }, { responseType: "text" });
+          return this.http.put(`${o}SubformPedidosInvitado/${t7}`, { cbNvStatusConfirmacion: "Declined" }, { responseType: "text" });
         }
         confirm(t7, i) {
           if (typeof window < "u" && window.GUEST_API_URL) return this.guestApi("action=confirm&guest=" + encodeURIComponent(new URLSearchParams(window.location.search).get("guest") || t7) + "&passes=" + encodeURIComponent(i));
-          return this.http.put(`${o}SubformPedidosInvitado/${t7}`, { inInvitadoPases: i, cbNvStatusConfirmacion: "Confirmado" });
+          return this.http.put(`${o}SubformPedidosInvitado/${t7}`, { inInvitadoPases: i, cbNvStatusConfirmacion: "Confirmed" });
         }
         triviaResultsSave(t7, i) {
           return this.http.put(`${o}SubformPedidosInvitado/${t7}`, { inRespuestasCorrectas: i, biTriviaContestada: true });
@@ -18889,7 +18889,7 @@ ${n.map((r2, o3) => `${o3 + 1}) ${r2.toString()}`).join(`
       _2 = (_a16 = class {
         constructor() {
           __publicField(this, "showMenu", Yb(false));
-          __publicField(this, "sections", ["Inicio", "Itinerario", "Ubicaciones", "NuestraHistoria", "MesaDeRegalos", "CodigoDeVestimenta", "Qr", "ConfirmarAsistencia", "BuenosDeseos", "Galeria", "SugerenciaCanciones", "Contacto"]);
+          __publicField(this, "sections", ["Inicio", "Itinerario", "Ubicaciones", "NuestraHistoria", "MesaDeRegalos", "CodigoDeVestimenta", "Qr", "ConfirmAttendance", "BuenosDeseos", "Galeria", "SugerenciaCanciones", "Contacto"]);
         }
         menuToggle() {
           this.showMenu.set(!this.showMenu());
@@ -18906,8 +18906,8 @@ ${n.map((r2, o3) => `${o3 + 1}) ${r2.toString()}`).join(`
         }), bu(), wu(2, "div", 2)(3, "div", 3), fy(4, "i", 4), bu()(), wu(5, "div", 5)(6, "div", 6)(7, "div")(8, "ul", 7)(9, "li")(10, "a", 8), yy("click", function() {
           return i.scrollTo("Inicio");
         }), FM(11, "Inicio"), bu()(), wu(12, "li")(13, "a", 8), yy("click", function() {
-          return i.scrollTo("ConfirmarAsistencia");
-        }), FM(14, "Confirmar Asistencia"), bu()(), wu(15, "li")(16, "a", 8), yy("click", function() {
+          return i.scrollTo("ConfirmAttendance");
+        }), FM(14, "Confirm Attendance"), bu()(), wu(15, "li")(16, "a", 8), yy("click", function() {
           return i.scrollTo("Itinerario");
         }), FM(17, "Itinerario"), bu()(), wu(18, "li")(19, "a", 8), yy("click", function() {
           return i.scrollTo("Ubicaciones");
@@ -19185,17 +19185,17 @@ ${n.map((r2, o3) => `${o3 + 1}) ${r2.toString()}`).join(`
         Wb(o3);
         let l = SM();
         return zb(l.confirmarasistencia());
-      }), wu(7, "h6", 15), FM(8, "Confirmar asistencia"), bu()()(), wu(9, "h3", 16), FM(10, "Respetuosamente"), bu(), wu(11, "h3", 17), FM(12, " NO NI\xD1OS "), fy(13, "i", 18), bu();
+      }), wu(7, "h6", 15), FM(8, "RSVP"), bu()()(), wu(9, "h3", 16), FM(10, "Respectfully"), bu(), wu(11, "h3", 17), FM(12, " NO CHILDREN "), fy(13, "i", 18), bu();
     }
     if (r2 & 2) {
       let o3 = SM();
-      iM(2), Mu(" ", o3.subformData().inInvitadoPases, " "), iM(2), Mu(" ", o3.subformData().inInvitadoPases == 1 ? "Pase" : "Pases", " ");
+      iM(2), Mu(" ", o3.subformData().inInvitadoPases, " "), iM(2), Mu(" ", o3.subformData().inInvitadoPases == 1 ? "Pass" : "Passes", " ");
     }
   }
   function ec2(r2, i) {
-    if (r2 & 1 && (wu(0, "div", 10)(1, "h3", 11)(2, "span", 19), FM(3), fy(4, "br"), bu(), FM(5), bu(), wu(6, "div", 20), fy(7, "QRCodeComponent", 21), bu(), wu(8, "h3", 11)(9, "h3", 22), FM(10, "No. Mesa"), bu(), wu(11, "span", 23), FM(12), bu()(), wu(13, "h3", 16), FM(14, "Respetuosamente"), bu(), wu(15, "h3", 17), FM(16, " NO NI\xD1OS "), fy(17, "i", 18), bu(), wu(18, "div", 24)(19, "h3", 22), FM(20, "Gracias por confirmar tu asistencia"), bu()()()), r2 & 2) {
+    if (r2 & 1 && (wu(0, "div", 10)(1, "h3", 11)(2, "span", 19), FM(3), fy(4, "br"), bu(), FM(5), bu(), wu(6, "div", 20), fy(7, "QRCodeComponent", 21), bu(), wu(8, "h3", 11)(9, "h3", 22), FM(10, "Table No."), bu(), wu(11, "span", 23), FM(12), bu()(), wu(13, "h3", 16), FM(14, "Respectfully"), bu(), wu(15, "h3", 17), FM(16, " NO CHILDREN "), fy(17, "i", 18), bu(), wu(18, "div", 24)(19, "h3", 22), FM(20, "Thank you for confirming your attendance"), bu()()()), r2 & 2) {
       let o3 = SM();
-      iM(3), Mu(" ", o3.subformData().inInvitadoPases, " "), iM(2), Mu(" ", o3.subformData().inInvitadoPases == 1 ? "Pase" : "Pases", " "), iM(2), Jm("codeValue", o3.text)("squareSize", 200), iM(5), Mu(" ", o3.subformData().nvInvitadoMesa, " ");
+      iM(3), Mu(" ", o3.subformData().inInvitadoPases, " "), iM(2), Mu(" ", o3.subformData().inInvitadoPases == 1 ? "Pass" : "Passes", " "), iM(2), Jm("codeValue", o3.text)("squareSize", 200), iM(5), Mu(" ", o3.subformData().nvInvitadoMesa, " ");
     }
   }
   function tc2(r2, i) {
@@ -21578,7 +21578,7 @@ Minimum version required to store current data is: ` + u4 + `.
           __publicField(this, "subformData", Yb([]));
           __publicField(this, "varS", Yb(false));
           __publicField(this, "reemplazarAcentos", (i) => {
-            let o3 = { \u00E1: "a", \u00E9: "e", \u00ED: "i", \u00F3: "o", \u00FA: "u", \u00E0: "a", \u00E8: "e", \u00EC: "i", \u00F2: "o", \u00F9: "u", \u00C1: "A", \u00C9: "E", \u00CD: "I", \u00D3: "O", \u00DA: "U", \u00C0: "A", \u00C8: "E", \u00CC: "I", \u00D2: "O", \u00D9: "U", \u00D1: "N", \u00F1: "n" }, s5 = /[Ã¡Ã Ã©Ã¨Ã­Ã¬Ã³Ã²ÃºÃ¹Ã±ÃÃ€Ã‰ÃˆÃÃŒÃ“Ã’ÃšÃ™Ã‘]/g;
+            let o3 = { \u00E1: "a", \u00E9: "e", \u00ED: "i", \u00F3: "o", \u00FA: "u", \u00E0: "a", \u00E8: "e", \u00EC: "i", \u00F2: "o", \u00F9: "u", \u00C1: "A", \u00C9: "E", \u00CD: "I", \u00D3: "O", \u00DA: "U", \u00C0: "A", \u00C8: "E", \u00CC: "I", \u00D2: "O", \u00D9: "U", \u00D1: "N", \u00F1: "n" }, s5 = /[áàéèíìóòúùñÁÀÉÈÍÌÓÒÚÙÑ]/g;
             return i.replace(s5, (l) => o3[l] || l);
           });
           __publicField(this, "text", `XV Chloe-Ann Rivera
@@ -21601,15 +21601,15 @@ Laredo TX 78041`);
           });
         }
         enviarForm(i, o3) {
-          Re4("Tu presencia har\xE1 nuestro d\xEDa a\xFAn m\xE1s especial", "\xBFQuieres confirmar asistencia?", "Si", () => {
-            console.log("Asistencia confirmada:"), this.subformPedidosInvitadoService.confirm(i, parseInt(o3)).subscribe((s5) => {
+          Re4("Your presence will make our day even more special", "Would you like to confirm attendance?", "Yes", () => {
+            console.log("Attendance confirmed:"), this.subformPedidosInvitadoService.confirm(i, parseInt(o3)).subscribe((s5) => {
               this.getSubformData(), Le4("Se guard\xF3 correctamente"), this.close();
             });
           });
         }
         declineAssistance(i) {
-          Re4("Lamentamos tu ausencia", "\xBFQuieres declinar asistencia?", "Si", () => {
-            console.log("Asistencia cancelada:"), this.subformPedidosInvitadoService.decline(i).subscribe({ next: (o3) => {
+          Re4("We are sorry you cannot attend", "Would you like to decline attendance?", "Yes", () => {
+            console.log("Attendance declined:"), this.subformPedidosInvitadoService.decline(i).subscribe({ next: (o3) => {
               o3 !== "Not Found" ? (Le4("Se guard\xF3 correctamente"), this.getSubformData(), this.close()) : Error("Ocurri\xF3 un error");
             }, error: (o3) => {
               console.error("Error en la solicitud:", o3), Error("Error de conexi\xF3n con el servidor");
@@ -21625,13 +21625,13 @@ Laredo TX 78041`);
       }), __publicField(_b, "\u0275cmp", yM({ type: _b, selectors: [["ModalConfirmAttendanceCanva"]], inputs: { tipo: "tipo" }, outputs: { closed: "closed" }, decls: 32, vars: 0, consts: [["passesSelect", ""], [1, "fixed", "inset-0", "z-50", "flex", "justify-center", "items-center", "bg-black", "bg-opacity-50"], [1, "bg-primary-500", "p-5", "rounded-lg", "shadow-xl", "w-full", "max-w-md"], [1, "flex", "justify-between", "items-center", "border-b", "pb-2", "mb-4", "mt-2", "mx-5"], [1, "text-white", "font-semibold", "text-3xl"], [1, "hover:text-black", "text-primary-600", "text-2xl", 3, "click"], [1, "p-6", "flex-auto", "text-gray-100", "border-b", "pb-2", "mb-4", "mt-2"], [1, "max-w-auto", "mx-auto"], [1, "divide-y", "divide-gray-400"], [1, "text-base", "leading-6", "space-y-4", "sm:text-lg"], ["id", "frmEmpleado", 1, "grid", "sm:grid-cols-1", "gap-12"], [1, "relative", "mt-4"], [1, "border-b-2", "md:text-lg", "text-base", "border-gray-300", "focus:border-gray-200"], ["for", "nvTallaCamisa", 1, "text-gray-200", "font-medium", "font-serif1", "text-2xl"], [1, "text-red-400"], ["name", "InInvitadoPases", 1, "w-4/4", "px-4", "py-2", "rounded-lg", "bg-primary-100", "text-primary-900", "border", "border-gray-300", "focus:outline-none", "focus:ring-2", "focus:ring-primary-500", "focus:border-primary-500", "transition"], [3, "value", "selected"], [1, "mt-10", "grid", "grid-cols-1", "gap-5", "mx-auto", "rounded-b", "bg-gradient-to-r", "from-primary-700", "to-primary-500"], ["type", "button", 1, "bg-green-500", 3, "click"], [1, "text-lg", "py-2"], ["aria-hidden", "true", 1, "fas", "fa-check", "min-w-[18px]", "text-primary-100"], ["type", "button", 1, "mt-5", "flex", "bg-red-500", "shadow-md", "mx-auto", "px-3", "py-1", "text-primary-400", 3, "click"], [1, "text-lg", "text-white"], ["aria-hidden", "true", 1, "fas", "fa-times", "min-w-[18px]", "pr-0.5"]], template: function(o3, s5) {
         if (o3 & 1) {
           let l = xM();
-          wu(0, "div", 1)(1, "div", 2)(2, "div", 3)(3, "h1", 4), FM(4, "Confirmar Pases"), bu(), wu(5, "button", 5), yy("click", function() {
+          wu(0, "div", 1)(1, "div", 2)(2, "div", 3)(3, "h1", 4), FM(4, "Confirm Passes"), bu(), wu(5, "button", 5), yy("click", function() {
             return Wb(l), zb(s5.close());
           }), FM(6, " \xD7 "), bu()(), wu(7, "div", 6)(8, "div", 7)(9, "div", 8)(10, "div", 9)(11, "div", 10)(12, "div")(13, "div", 11)(14, "div", 12)(15, "label", 13), FM(16, " Confirmar pases"), wu(17, "span", 14), FM(18, " *"), bu()(), wu(19, "select", 15, 0), _M(21, ol2, 2, 3, "option", 16, CM), bu()()()()()()()(), wu(23, "div", 17)(24, "button", 18), yy("click", function() {
             Wb(l);
             let c2 = LM(20);
             return zb(s5.enviarForm(s5.subformData().noPartidaA, c2.value));
-          }), wu(25, "h4", 19), fy(26, "i", 20), FM(27, " Confirmar asistencia "), bu()(), wu(28, "button", 21), yy("click", function() {
+          }), wu(25, "h4", 19), fy(26, "i", 20), FM(27, " RSVP "), bu()(), wu(28, "button", 21), yy("click", function() {
             return Wb(l), zb(s5.declineAssistance(s5.subformData().noPartidaA));
           }), wu(29, "h4", 22), fy(30, "i", 23), FM(31, " No podre asistir "), bu()()()()()();
         }
@@ -21682,7 +21682,7 @@ Laredo TX 78041`);
           __publicField(this, "varS", Yb(false));
           __publicField(this, "text", "");
           __publicField(this, "reemplazarAcentos", function(i) {
-            var o3 = { \u00E1: "a", \u00E9: "e", \u00ED: "i", \u00F3: "o", \u00FA: "u", \u00E0: "a", \u00E8: "e", \u00EC: "i", \u00F2: "o", \u00F9: "u", \u00C1: "A", \u00C9: "E", \u00CD: "I", \u00D3: "O", \u00DA: "U", \u00C0: "A", \u00C8: "E", \u00CC: "I", \u00D2: "O", \u00D9: "U", \u00D1: "N", \u00F1: "n" }, s5 = /[Ã¡Ã Ã©Ã¨Ã­Ã¬Ã³Ã²ÃºÃ¹Ã±]/gi, l = "";
+            var o3 = { \u00E1: "a", \u00E9: "e", \u00ED: "i", \u00F3: "o", \u00FA: "u", \u00E0: "a", \u00E8: "e", \u00EC: "i", \u00F2: "o", \u00F9: "u", \u00C1: "A", \u00C9: "E", \u00CD: "I", \u00D3: "O", \u00DA: "U", \u00C0: "A", \u00C8: "E", \u00CC: "I", \u00D2: "O", \u00D9: "U", \u00D1: "N", \u00F1: "n" }, s5 = /[áàéèíìóòúùñ]/gi, l = "";
             return i && (l = i.replace(s5, function(u4) {
               return o3[u4];
             })), l;
@@ -21705,8 +21705,8 @@ Laredo TX 78041`;
           });
         }
         enviarForm(i, o3) {
-          Re4("Tu presencia har\xE1 nuestro d\xEDa a\xFAn m\xE1s especial", "\xBFQuieres confirmar asistencia?", "Si", () => {
-            console.log("Asistencia confirmada:"), this.subformPedidosInvitadoService.confirm(i, parseInt(o3)).subscribe((s5) => {
+          Re4("Your presence will make our day even more special", "Would you like to confirm attendance?", "Yes", () => {
+            console.log("Attendance confirmed:"), this.subformPedidosInvitadoService.confirm(i, parseInt(o3)).subscribe((s5) => {
               this.getSubformData(), Le4("Se guard\xF3 correctamente");
             });
           });
@@ -21716,8 +21716,8 @@ Laredo TX 78041`;
           return Array.from({ length: i != null ? i : 0 }, (o3, s5) => s5 + 1);
         }
         declineAssistance(i) {
-          Re4("Lamentamos tu ausencia", "\xBFQuieres declinar asistencia?", "Si", () => {
-            console.log("Asistencia cancelada:"), this.subformPedidosInvitadoService.decline(i).subscribe({ next: (o3) => {
+          Re4("We are sorry you cannot attend", "Would you like to decline attendance?", "Yes", () => {
+            console.log("Attendance declined:"), this.subformPedidosInvitadoService.decline(i).subscribe({ next: (o3) => {
               o3 !== "Not Found" ? (Le4("Se guard\xF3 correctamente"), this.getSubformData()) : Error("Ocurri\xF3 un error");
             }, error: (o3) => {
               console.error("Error en la solicitud:", o3), Error("Error de conexi\xF3n con el servidor");
@@ -21729,10 +21729,10 @@ Laredo TX 78041`;
         }
       }, __publicField(_a27, "\u0275fac", function(o3) {
         return new (o3 || _a27)(fs(je4));
-      }), __publicField(_a27, "\u0275cmp", yM({ type: _a27, selectors: [["NombreDeInvitados_1boton_Original"]], decls: 17, vars: 12, consts: [["id", "ConfirmarAsistencia", 1, "min-h-auto", "z-10", "relative", "flex", "flex-col", "sm:grid", "sm:grid-cols-8"], [1, "sm:col-span-4", "w-full"], [1, "h-full", "bg-cover", "bg-[left_calc(90%)_top_calc(20%)]", "sm:bg-[left_calc(50%)_top_calc(10%)]", "min-h-[60vh]", "sm:h-[100vh]", "relative", "w-full", 3, "ngStyle"], [1, "sm:col-span-4", "h-full", "w-full", "flex", "items-end", "sm:items-start"], [1, "w-full", "bg-primary-500", "px-7", "pb-1", "z-0", "flex", "flex-col", "justify-center", "items-center", "sm:h-full"], [1, "justify-center", "bg-cover", "bg-white", "text-primary-500", "p-8", "sm:px-3", "sm:py-6", "-translate-y-7", "sm:-translate-y-7", 3, "ngStyle"], ["data-aos", "zoom-in"], ["data-aos", "fade-right", 1, "sm:py-2", "py-1", "uppercase"], ["src", "assets/images/division.png", "alt", "", 1, "w-36", "p-1", "mx-auto"], ["data-aos", "fade-right", 1, "sm:py-2", "py-1"], ["id", "Qr", 1, "bg-[left_calc(40%)_top_calc(40%)]", "min-h-[50vh]", "bg-cover", "z-40"], [1, "my-1"], [1, "text-8xl", "font-serif1"], [1, "flex", "justify-center", "items-center", "w-full", "sm:w-1/2", "mx-auto", "py-1", "mt-3", "border", "border-primary-200"], ["type", "button", 3, "click"], [1, "font-serif1"], [1, "text-center", "font-serif1", "py-1", "mt-5"], [1, "text-center", "font-serif1", "font-extrabold", "py-1"], ["aria-hidden", "true", 1, "fa", "fa-child", "pl-2"], [1, "text-8xl", "font-serif14"], [1, "grid", "justify-center", "items-center", "py-2"], [3, "codeValue", "squareSize"], [1, "text-2xl"], [1, "text-5xl", "font-serif2"], [1, ""], [3, "closed"]], template: function(o3, s5) {
+      }), __publicField(_a27, "\u0275cmp", yM({ type: _a27, selectors: [["NombreDeInvitados_1boton_Original"]], decls: 17, vars: 12, consts: [["id", "ConfirmAttendance", 1, "min-h-auto", "z-10", "relative", "flex", "flex-col", "sm:grid", "sm:grid-cols-8"], [1, "sm:col-span-4", "w-full"], [1, "h-full", "bg-cover", "bg-[left_calc(90%)_top_calc(20%)]", "sm:bg-[left_calc(50%)_top_calc(10%)]", "min-h-[60vh]", "sm:h-[100vh]", "relative", "w-full", 3, "ngStyle"], [1, "sm:col-span-4", "h-full", "w-full", "flex", "items-end", "sm:items-start"], [1, "w-full", "bg-primary-500", "px-7", "pb-1", "z-0", "flex", "flex-col", "justify-center", "items-center", "sm:h-full"], [1, "justify-center", "bg-cover", "bg-white", "text-primary-500", "p-8", "sm:px-3", "sm:py-6", "-translate-y-7", "sm:-translate-y-7", 3, "ngStyle"], ["data-aos", "zoom-in"], ["data-aos", "fade-right", 1, "sm:py-2", "py-1", "uppercase"], ["src", "assets/images/division.png", "alt", "", 1, "w-36", "p-1", "mx-auto"], ["data-aos", "fade-right", 1, "sm:py-2", "py-1"], ["id", "Qr", 1, "bg-[left_calc(40%)_top_calc(40%)]", "min-h-[50vh]", "bg-cover", "z-40"], [1, "my-1"], [1, "text-8xl", "font-serif1"], [1, "flex", "justify-center", "items-center", "w-full", "sm:w-1/2", "mx-auto", "py-1", "mt-3", "border", "border-primary-200"], ["type", "button", 3, "click"], [1, "font-serif1"], [1, "text-center", "font-serif1", "py-1", "mt-5"], [1, "text-center", "font-serif1", "font-extrabold", "py-1"], ["aria-hidden", "true", 1, "fa", "fa-child", "pl-2"], [1, "text-8xl", "font-serif14"], [1, "grid", "justify-center", "items-center", "py-2"], [3, "codeValue", "squareSize"], [1, "text-2xl"], [1, "text-5xl", "font-serif2"], [1, ""], [3, "closed"]], template: function(o3, s5) {
         if (o3 & 1 && (wu(0, "div", 0)(1, "div", 1), fy(2, "div", 2), bu(), wu(3, "div", 3)(4, "div", 4)(5, "div", 5)(6, "div", 6)(7, "h3", 7), FM(8), bu(), fy(9, "img", 8), bu(), wu(10, "h2", 9), FM(11), bu(), wu(12, "h6", 9), FM(13), bu(), vm(14, Zl2, 14, 2)(15, ec2, 21, 5, "div", 10), bu()()()(), vm(16, tc2, 1, 0, "ModalConfirmAttendanceCanva")), o3 & 2) {
           let l, u4;
-          iM(2), Jm("ngStyle", VM(8, wr2, "url(" + s5.pasesUrl() + ")")), iM(3), Jm("ngStyle", VM(10, wr2, "url(" + s5.textureUrl + ")")), iM(3), Mu(" ", s5.subformData().inInvitadoPases === 1 ? "\xA1Es un placer Invitarte!" : "\xA1Es un placer Invitarlos!", " "), iM(3), Mu(" ", (l = s5.subformData().nvInvitadoNombre) !== null && l !== void 0 ? l : "Aqu\xED va el nombre de tus invitados", " "), iM(2), Mu(" ", (u4 = s5.subformData().txInvitadoMensajeEspecial) !== null && u4 !== void 0 ? u4 : "Aqu\xED va el mensaje a tus invitados", " "), iM(), MM(s5.subformData().cbNvStatusConfirmacion == "Pendiente" ? 14 : -1), iM(), MM(s5.subformData().cbNvStatusConfirmacion == "Confirmado" ? 15 : -1), iM(), MM(s5.modalsStore.value() === "ConfirmarModal" ? 16 : -1);
+          iM(2), Jm("ngStyle", VM(8, wr2, "url(" + s5.pasesUrl() + ")")), iM(3), Jm("ngStyle", VM(10, wr2, "url(" + s5.textureUrl + ")")), iM(3), Mu(" ", s5.subformData().inInvitadoPases === 1 ? "We are delighted to invite you!" : "We are delighted to invite you!", " "), iM(3), Mu(" ", (l = s5.subformData().nvInvitadoNombre) !== null && l !== void 0 ? l : "Guest name", " "), iM(2), Mu(" ", (u4 = s5.subformData().txInvitadoMensajeEspecial) !== null && u4 !== void 0 ? u4 : "Guest message", " "), iM(), MM(s5.subformData().cbNvStatusConfirmacion == "Pending" ? 14 : -1), iM(), MM(s5.subformData().cbNvStatusConfirmacion == "Confirmed" ? 15 : -1), iM(), MM(s5.modalsStore.value() === "ConfirmarModal" ? 16 : -1);
         }
       }, dependencies: [he, fe3, Ut4, kt5], encapsulation: 2 })), _a27);
     }
@@ -24466,7 +24466,7 @@ see https://add-to-calendar-button.com for details.
         Wb(i);
         let m5 = SM();
         return zb(m5.selloClicked());
-      }), bu(), wu(6, "div", 6)(7, "div", 7)(8, "h5", 8), FM(9, "Click Aqu\xED"), bu()(), fy(10, "div", 9), bu()()(), wu(11, "div", 10), vm(12, Q6, 2, 6)(13, W5, 2, 6), bu()();
+      }), bu(), wu(6, "div", 6)(7, "div", 7)(8, "h5", 8), FM(9, "Click Here"), bu()(), fy(10, "div", 9), bu()()(), wu(11, "div", 10), vm(12, Q6, 2, 6)(13, W5, 2, 6), bu()();
     }
     if (e8 & 2) {
       let i = SM();

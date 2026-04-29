@@ -10,6 +10,10 @@
     backLink.href = "index.html?guest=" + encodeURIComponent(guestId);
   }
 
+  function t(value) {
+    return window.XV_I18N ? window.XV_I18N.t(value) : value;
+  }
+
   function setBusy(isBusy) {
     buttons.forEach((button) => {
       button.disabled = isBusy;
@@ -19,7 +23,7 @@
   function guestApi(query) {
     return new Promise((resolve, reject) => {
       if (!window.GUEST_API_URL) {
-        reject(new Error("Missing GUEST_API_URL in guest-api-config.js"));
+        reject(new Error(t("Missing GUEST_API_URL in guest-api-config.js")));
         return;
       }
 
@@ -28,7 +32,7 @@
       const separator = window.GUEST_API_URL.includes("?") ? "&" : "?";
       const timeout = window.setTimeout(() => {
         cleanup();
-        reject(new Error("The RSVP request timed out. Please try again."));
+        reject(new Error(t("The RSVP request timed out. Please try again.")));
       }, 12000);
 
       function cleanup() {
@@ -44,7 +48,7 @@
 
       script.onerror = () => {
         cleanup();
-        reject(new Error("Could not reach the RSVP service. Please try again."));
+        reject(new Error(t("Could not reach the RSVP service. Please try again.")));
       };
 
       script.src = window.GUEST_API_URL + separator + query + "&callback=" + encodeURIComponent(callbackName);
@@ -62,13 +66,13 @@
       return;
     }
 
-    guestName.textContent = "Invitation guest";
+    guestName.textContent = t("Invitation guest");
   }
 
   async function loadGuest() {
     if (!guestId) {
-      guestName.textContent = "Missing guest id";
-      showError("Please open this page from your invitation link.");
+      guestName.textContent = t("Missing guest id");
+      showError(t("Please open this page from your invitation link."));
       setBusy(true);
       return;
     }
@@ -77,7 +81,7 @@
       const data = await guestApi("guest=" + encodeURIComponent(guestId));
       updateGuest(data);
     } catch (error) {
-      guestName.textContent = "Invitation guest";
+      guestName.textContent = t("Invitation guest");
       showError(error.message);
     }
   }
@@ -86,7 +90,7 @@
     if (!guestId) return;
 
     setBusy(true);
-    status.textContent = "Saving RSVP...";
+    status.textContent = t("Saving RSVP...");
 
     try {
       const data = await guestApi(
@@ -94,8 +98,8 @@
       );
       updateGuest(data);
       status.textContent = action === "confirm"
-        ? "Thank you. Your RSVP is confirmed."
-        : "Thank you. Your response has been saved.";
+        ? t("Thank you. Your RSVP is confirmed.")
+        : t("Thank you. Your response has been saved.");
     } catch (error) {
       showError(error.message);
     } finally {
@@ -105,6 +109,12 @@
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => submitRsvp(button.dataset.action));
+  });
+
+  window.addEventListener("xv-language-change", () => {
+    if (!guestName.textContent || guestName.textContent === "Invitation guest" || guestName.textContent === "Invitado") {
+      guestName.textContent = t("Invitation guest");
+    }
   });
 
   loadGuest();

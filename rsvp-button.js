@@ -11,6 +11,7 @@
     + encodeURIComponent(href);
   const fallbackQrUrl = "https://quickchart.io/qr?size=180&margin=2&text=" + encodeURIComponent(href);
   let guestRecord = null;
+  let mountScheduled = false;
   const styles = document.createElement("style");
   styles.textContent = `
     .simple-rsvp-panel {
@@ -99,11 +100,19 @@
 
   document.head.appendChild(styles);
 
+  function t(value) {
+    return window.XV_I18N ? window.XV_I18N.t(value) : value;
+  }
+
+  function currentLanguage() {
+    return window.XV_I18N ? window.XV_I18N.getLanguage() : "en";
+  }
+
   function createLink(className) {
     const link = document.createElement("a");
     link.className = className;
     link.href = href;
-    link.textContent = "RSVP";
+    link.textContent = t("RSVP");
     return link;
   }
 
@@ -121,7 +130,7 @@
       passNumber.className = "simple-rsvp-pass-number";
       passNumber.textContent = String(guestRecord.inInvitadoPases || "");
       passLabel.className = "simple-rsvp-pass-label";
-      passLabel.textContent = "Pases";
+      passLabel.textContent = t(Number(guestRecord.inInvitadoPases || 0) === 1 ? "Pass" : "Passes");
 
       panel.appendChild(passNumber);
       panel.appendChild(passLabel);
@@ -129,7 +138,7 @@
 
     qrLink.className = "simple-rsvp-qr";
     qrLink.href = href;
-    qrLink.setAttribute("aria-label", "Open RSVP page");
+    qrLink.setAttribute("aria-label", t("Open RSVP page"));
     qrImage.src = qrUrl;
     qrImage.alt = "RSVP QR code";
     qrImage.width = 180;
@@ -149,7 +158,7 @@
       const tableNumber = document.createElement("div");
 
       tableLabel.className = "simple-rsvp-table-label";
-      tableLabel.textContent = "No. Mesa";
+      tableLabel.textContent = t("Table No.");
       tableNumber.className = "simple-rsvp-table-number";
       tableNumber.textContent = String(guestRecord.nvInvitadoMesa);
 
@@ -163,6 +172,42 @@
   function removeOldInline() {
     document.querySelectorAll(".simple-rsvp-inline, .simple-rsvp-panel").forEach((element) => {
       element.remove();
+    });
+  }
+
+  function pruneDuplicatePanels() {
+    const panels = Array.from(document.querySelectorAll(".simple-rsvp-panel"));
+    panels.slice(1).forEach((panel) => panel.remove());
+
+    const activePanels = Array.from(document.querySelectorAll(".simple-rsvp-panel"));
+    const nativeQrBlocks = document.querySelectorAll("#Qr qrcodecomponent, #Qr QRCodeComponent");
+    if (activePanels.length > 0) {
+      nativeQrBlocks.forEach((nativeQr) => {
+        nativeQr.style.display = "none";
+      });
+      hideNativeConfirmButtons();
+    }
+  }
+
+  function hideNativeConfirmButtons() {
+    const labels = new Set([
+      "confirm attendance",
+      "confirmar asistencia",
+      "rsvp"
+    ]);
+    const candidates = Array.from(document.querySelectorAll("button, a, [role='button'], div"));
+
+    candidates.forEach((candidate) => {
+      if (candidate.closest(".simple-rsvp-panel")) return;
+      if (candidate.closest(".xv-language-toggle")) return;
+
+      const text = (candidate.textContent || "").replace(/\s+/g, " ").trim().toLowerCase();
+      if (!labels.has(text)) return;
+
+      const buttonLike = candidate.closest("button, a, [role='button']") || candidate;
+      if (!buttonLike.closest(".simple-rsvp-panel")) {
+        buttonLike.style.setProperty("display", "none", "important");
+      }
     });
   }
 
@@ -234,8 +279,8 @@
   }
 
   function mountButton(attempt) {
-    const passesLabel = findTextElement("pases");
-    const confirmTarget = findTextElement("confirmar asistencia");
+    const passesLabel = findTextElement("passes") || findTextElement("pass") || findTextElement("pases");
+    const confirmTarget = findTextElement("confirm attendance") || findTextElement("rsvp") || findTextElement("confirmar asistencia");
     const guestNameElement = findGuestNameElement();
 
     if (passesLabel && !document.querySelector(".simple-rsvp-panel")) {
@@ -243,18 +288,15 @@
       const panel = createQrPanel(false);
 
       passesLabel.insertAdjacentElement("afterend", panel);
-      if (confirmTarget) {
-        const confirmButton = confirmTarget.closest("button, a, [role='button']");
-        if (confirmButton && !confirmButton.closest(".simple-rsvp-panel")) {
-          confirmButton.style.display = "none";
-        }
-      }
+      hideNativeConfirmButtons();
+      pruneDuplicatePanels();
       return;
     }
 
     if (guestNameElement && !document.querySelector(".simple-rsvp-panel")) {
       removeOldInline();
       guestNameElement.insertAdjacentElement("afterend", createQrPanel(true));
+      pruneDuplicatePanels();
       return;
     }
 
@@ -270,6 +312,7 @@
       } else {
         qrSection.appendChild(panel);
       }
+      pruneDuplicatePanels();
       return;
     }
 
@@ -279,10 +322,25 @@
   }
 
   function watchForQrSection() {
-    const observer = new MutationObserver(() => {
-      if (findTextElement("pases") || findGuestNameElement() || document.getElementById("Qr")) {
+    let observer;
+    function scheduleMount() {
+      if (mountScheduled) return;
+      mountScheduled = true;
+
+      window.requestAnimationFrame(() => {
+        mountScheduled = false;
         mountButton(0);
-        observer.disconnect();
+        pruneDuplicatePanels();
+
+        if (document.querySelector(".simple-rsvp-panel") && observer) {
+          window.setTimeout(() => observer.disconnect(), 1000);
+        }
+      });
+    }
+
+    observer = new MutationObserver(() => {
+      if (findTextElement("passes") || findTextElement("pass") || findTextElement("pases") || findGuestNameElement() || document.getElementById("Qr")) {
+        scheduleMount();
       }
     });
 
@@ -291,7 +349,7 @@
       subtree: true
     });
 
-    window.setTimeout(() => observer.disconnect(), 20000);
+    window.setTimeout(() => observer.disconnect(), 8000);
   }
 
   async function start() {
@@ -304,16 +362,26 @@
     mountButton(0);
     watchForQrSection();
 
-    let attempts = 0;
-    const interval = window.setInterval(() => {
-      attempts += 1;
+    window.setTimeout(() => {
       mountButton(0);
-
-      if (document.querySelector(".simple-rsvp-panel") || attempts >= 40) {
-        window.clearInterval(interval);
-      }
-    }, 500);
+      pruneDuplicatePanels();
+      hideNativeConfirmButtons();
+    }, 1000);
+    window.setTimeout(() => {
+      mountButton(0);
+      pruneDuplicatePanels();
+      hideNativeConfirmButtons();
+    }, 2500);
   }
+
+  window.addEventListener("xv-language-change", () => {
+    const existingPanel = document.querySelector(".simple-rsvp-panel");
+    const includePasses = Boolean(existingPanel && existingPanel.classList.contains("simple-rsvp-repair"));
+    if (!existingPanel) return;
+
+    existingPanel.replaceWith(createQrPanel(includePasses));
+    pruneDuplicatePanels();
+  });
 
   if (document.readyState === "loading") {
     window.addEventListener("load", start);
