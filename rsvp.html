@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RSVP | XV Chloe-Ann Rivera</title>
+  <script src="service-worker-cleanup.js?v=20260430-1"></script>
   <style>
     :root {
       color-scheme: light;
@@ -127,6 +128,66 @@
       color: var(--rose-dark);
       text-decoration: none;
     }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 24px;
+      background: rgba(45, 37, 39, 0.42);
+      z-index: 20;
+    }
+
+    .modal-backdrop.is-open {
+      display: grid;
+    }
+
+    .modal {
+      width: min(100%, 360px);
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: 0 24px 70px rgba(45, 37, 39, 0.3);
+      text-align: center;
+    }
+
+    .modal label {
+      display: block;
+      margin: 0 0 16px;
+      color: var(--rose-dark);
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .modal select {
+      display: block;
+      width: min(100%, 180px);
+      min-height: 48px;
+      margin: 0 auto 18px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: 700 18px Arial, sans-serif;
+      text-align: center;
+      text-align-last: center;
+    }
+
+    .modal-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .modal .secondary {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--rose-dark);
+    }
   </style>
 </head>
 
@@ -146,9 +207,20 @@
     <a id="backLink" class="back-link" href="index.html">Back to Invitation</a>
   </main>
 
+  <div id="attendanceModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="attendanceLabel">
+    <div class="modal">
+      <label id="attendanceLabel" for="attendanceCount">How many passes will you use?</label>
+      <select id="attendanceCount"></select>
+      <div class="modal-actions">
+        <button id="attendanceCancel" class="secondary" type="button">Cancel</button>
+        <button id="attendanceConfirm" class="attending" type="button">Confirm</button>
+      </div>
+    </div>
+  </div>
+
   <script src="guest-api-config.js"></script>
-  <script src="language-toggle.js?v=20260428-10"></script>
-  <script src="rsvp.js?v=20260428-1"></script>
+  <script src="language-toggle.js?v=20260430-1"></script>
+  <script src="rsvp.js?v=20260430-1"></script>
 </body>
 
 </html>

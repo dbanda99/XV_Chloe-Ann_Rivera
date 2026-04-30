@@ -5,6 +5,13 @@
   const status = document.getElementById("status");
   const backLink = document.getElementById("backLink");
   const buttons = Array.from(document.querySelectorAll("[data-action]"));
+  const attendanceModal = document.getElementById("attendanceModal");
+  const attendanceCount = document.getElementById("attendanceCount");
+  const attendanceCancel = document.getElementById("attendanceCancel");
+  const attendanceConfirm = document.getElementById("attendanceConfirm");
+  const attendanceLabel = document.getElementById("attendanceLabel");
+  let guestRecord = null;
+  let availablePasses = 1;
 
   if (guestId) {
     backLink.href = "index.html?guest=" + encodeURIComponent(guestId);
@@ -18,6 +25,8 @@
     buttons.forEach((button) => {
       button.disabled = isBusy;
     });
+    if (attendanceCancel) attendanceCancel.disabled = isBusy;
+    if (attendanceConfirm) attendanceConfirm.disabled = isBusy;
   }
 
   function guestApi(query) {
@@ -61,12 +70,44 @@
   }
 
   function updateGuest(data) {
+    guestRecord = data || null;
+    availablePasses = Math.max(1, Number(data && data.inInvitadoPases ? data.inInvitadoPases : 1));
+
     if (data && data.nvInvitadoNombre) {
       guestName.textContent = data.nvInvitadoNombre;
       return;
     }
 
     guestName.textContent = t("Invitation guest");
+  }
+
+  function fillAttendanceOptions() {
+    if (!attendanceCount) return;
+
+    attendanceCount.innerHTML = "";
+    for (let count = 1; count <= availablePasses; count += 1) {
+      const option = document.createElement("option");
+      option.value = String(count);
+      option.textContent = String(count);
+      attendanceCount.appendChild(option);
+    }
+  }
+
+  function openAttendanceModal() {
+    if (!attendanceModal) return;
+
+    fillAttendanceOptions();
+    if (attendanceLabel) attendanceLabel.textContent = t("How many passes will you use?");
+    if (attendanceCancel) attendanceCancel.textContent = t("Cancel");
+    if (attendanceConfirm) attendanceConfirm.textContent = t("Confirm");
+    attendanceModal.classList.add("is-open");
+    window.setTimeout(() => attendanceCount && attendanceCount.focus(), 0);
+  }
+
+  function closeAttendanceModal() {
+    if (!attendanceModal) return;
+
+    attendanceModal.classList.remove("is-open");
   }
 
   async function loadGuest() {
@@ -86,16 +127,20 @@
     }
   }
 
-  async function submitRsvp(action) {
+  async function submitRsvp(action, guestsAttending) {
     if (!guestId) return;
 
     setBusy(true);
     status.textContent = t("Saving RSVP...");
 
     try {
-      const data = await guestApi(
-        "guest=" + encodeURIComponent(guestId) + "&action=" + encodeURIComponent(action)
-      );
+      let query = "guest=" + encodeURIComponent(guestId) + "&action=" + encodeURIComponent(action);
+      if (typeof guestsAttending === "number") {
+        const encodedCount = encodeURIComponent(String(guestsAttending));
+        query += "&guestsAttending=" + encodedCount + "&guests_attending=" + encodedCount;
+      }
+
+      const data = await guestApi(query);
       updateGuest(data);
       status.textContent = action === "confirm"
         ? t("Thank you. Your RSVP is confirmed.")
@@ -108,13 +153,47 @@
   }
 
   buttons.forEach((button) => {
-    button.addEventListener("click", () => submitRsvp(button.dataset.action));
+    button.addEventListener("click", () => {
+      const action = button.dataset.action;
+
+      if (action === "confirm" && availablePasses > 1) {
+        openAttendanceModal();
+        return;
+      }
+
+      submitRsvp(action, action === "confirm" ? 1 : 0);
+    });
+  });
+
+  if (attendanceCancel) {
+    attendanceCancel.addEventListener("click", closeAttendanceModal);
+  }
+
+  if (attendanceConfirm) {
+    attendanceConfirm.addEventListener("click", () => {
+      const selectedCount = Math.max(1, Number(attendanceCount && attendanceCount.value ? attendanceCount.value : 1));
+      closeAttendanceModal();
+      submitRsvp("confirm", selectedCount);
+    });
+  }
+
+  if (attendanceModal) {
+    attendanceModal.addEventListener("click", (event) => {
+      if (event.target === attendanceModal) closeAttendanceModal();
+    });
+  }
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeAttendanceModal();
   });
 
   window.addEventListener("xv-language-change", () => {
     if (!guestName.textContent || guestName.textContent === "Invitation guest" || guestName.textContent === "Invitado") {
       guestName.textContent = t("Invitation guest");
     }
+    if (attendanceLabel) attendanceLabel.textContent = t("How many passes will you use?");
+    if (attendanceCancel) attendanceCancel.textContent = t("Cancel");
+    if (attendanceConfirm) attendanceConfirm.textContent = t("Confirm");
   });
 
   loadGuest();

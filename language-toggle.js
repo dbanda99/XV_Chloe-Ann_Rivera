@@ -52,6 +52,7 @@
     "photo gallery": "Galer\u00eda de Fotos",
     "gift table": "Mesa de regalos",
     "gift": "Regalo",
+    "all gifts are happily received, but gifts are not required to attend. your presence is the most important gift.": "Todos los regalos se reciben con mucho cari\u00f1o, pero no son necesarios para asistir. Tu presencia es el regalo m\u00e1s importante.",
     "what matters most is having you with us! if you would like to give a gift, we will be very grateful!": "\u00a1Que nos acompa\u00f1es es lo m\u00e1s importante! Y si est\u00e1 en tu disposici\u00f3n realizar una muestra de cari\u00f1o, \u00a1estaremos muy agradecidos!",
     "the envelope shower is the tradition of gifting cash in an envelope on the day of the event": "La lluvia de sobres, es la tradici\u00f3n de regalar dinero en efectivo en un sobre el d\u00eda del evento",
     "lodging suggestion": "Sugerencia de Hospedaje",
@@ -83,6 +84,9 @@
     "will you attend the xv?": "\u00bfAsistir\u00e1s a los XV?",
     "attending": "Asistir\u00e9",
     "not attending": "No asistir\u00e9",
+    "how many passes will you use?": "\u00bfCu\u00e1ntos pases usar\u00e1s?",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
     "back to invitation": "Volver a la invitaci\u00f3n",
     "loading invitation...": "Cargando invitaci\u00f3n...",
     "invitation guest": "Invitado",
@@ -96,9 +100,12 @@
     "missing guest_api_url in guest-api-config.js": "Falta GUEST_API_URL en guest-api-config.js",
     "open rsvp page": "Abrir p\u00e1gina RSVP",
     "view in english": "Ver en ingl\u00e9s"
-    ,"rsvp by may 25 with guest count, name, and phone number. father: joe c. rivera 956-898-2592. mother: diana l. rivera 956-231-7288. sister: ashley n. montemayor.": "Confirma tu asistencia antes del 25 de mayo con cantidad de invitados, nombre y tel\u00e9fono. Padre: Joe C. Rivera 956-898-2592. Madre: Diana L. Rivera 956-231-7288. Hermana: Ashley N. Montemayor."
-    ,"made with <3 for our guests": "Hecho con <3 para nuestros invitados"
-    ,"made with <3 for our guest": "Hecho con <3 para nuestros invitados"
+    ,"rsvp by may 25. please confirm your attendance and guest count through your invitation link.": "Confirma antes del 25 de mayo. Por favor confirma tu asistencia y cantidad de invitados desde el enlace de tu invitaci\u00f3n."
+    ,"rsvp by may 25 with guest count, name, and phone number. father: joe c. rivera 956-898-2592. mother: diana l. rivera 956-231-7288. sister: ashley n. montemayor.": "Confirma antes del 25 de mayo. Por favor confirma tu asistencia y cantidad de invitados desde el enlace de tu invitaci\u00f3n."
+    ,"made with \u2764\ufe0f for our guests": "Hecho con \u2764\ufe0f para nuestros invitados"
+    ,"made with \u2764\ufe0f for our guest": "Hecho con \u2764\ufe0f para nuestros invitados"
+    ,"made with <3 for our guests": "Hecho con \u2764\ufe0f para nuestros invitados"
+    ,"made with <3 for our guest": "Hecho con \u2764\ufe0f para nuestros invitados"
   };
 
   const spanishToEnglish = {
@@ -152,6 +159,7 @@
     "galer\u00eda de fotos": "Photo Gallery",
     "mesa de": "Gift",
     "regalos": "Table",
+    "todos los regalos se reciben con mucho cari\u00f1o, pero no son necesarios para asistir. tu presencia es el regalo m\u00e1s importante.": "All gifts are happily received, but gifts are not required to attend. Your presence is the most important gift.",
     "\u00a1que nos acompa\u00f1es es lo m\u00e1s importante! y si est\u00e1 en tu disposici\u00f3n realizar una muestra de cari\u00f1o, \u00a1estaremos muy agradecidos!": "What matters most is having you with us! If you would like to give a gift, we will be very grateful!",
     "\"la lluvia de sobres, es la tradici\u00f3n de regalar dinero en efectivo en un sobre el d\u00eda del evento\"": "\"The envelope shower is the tradition of gifting cash in an envelope on the day of the event\"",
     "la lluvia de sobres, es la tradici\u00f3n de regalar dinero en efectivo en un sobre el d\u00eda del evento": "The envelope shower is the tradition of gifting cash in an envelope on the day of the event",
@@ -183,6 +191,9 @@
     "\u00bfasistir\u00e1s a los xv?": "Will you attend the XV?",
     "asistir\u00e9": "Attending",
     "no asistir\u00e9": "Not Attending",
+    "\u00bfcu\u00e1ntos pases usar\u00e1s?": "How many passes will you use?",
+    "cancelar": "Cancel",
+    "confirmar": "Confirm",
     "volver a la invitaci\u00f3n": "Back to Invitation",
     "cargando invitaci\u00f3n...": "Loading invitation...",
     "invitado": "Invitation guest",
@@ -196,8 +207,10 @@
     "falta guest_api_url en guest-api-config.js": "Missing GUEST_API_URL in guest-api-config.js",
     "abrir p\u00e1gina rsvp": "Open RSVP page",
     "ver en espa\u00f1ol": "View in Spanish",
-    "confirma tu asistencia antes del 25 de mayo con cantidad de invitados, nombre y tel\u00e9fono. padre: joe c. rivera 956-898-2592. madre: diana l. rivera 956-231-7288. hermana: ashley n. montemayor.": "RSVP by May 25 with guest count, name, and phone number. Father: Joe C. Rivera 956-898-2592. Mother: Diana L. Rivera 956-231-7288. Sister: Ashley N. Montemayor.",
-    "hecho con <3 para nuestros invitados": "Made with <3 for our guests"
+    "confirma antes del 25 de mayo. por favor confirma tu asistencia y cantidad de invitados desde el enlace de tu invitaci\u00f3n.": "RSVP by May 25. Please confirm your attendance and guest count through your invitation link.",
+    "confirma tu asistencia antes del 25 de mayo con cantidad de invitados, nombre y tel\u00e9fono. padre: joe c. rivera 956-898-2592. madre: diana l. rivera 956-231-7288. hermana: ashley n. montemayor.": "RSVP by May 25. Please confirm your attendance and guest count through your invitation link.",
+    "hecho con \u2764\ufe0f para nuestros invitados": "Made with \u2764\ufe0f for our guests",
+    "hecho con <3 para nuestros invitados": "Made with \u2764\ufe0f for our guests"
   };
 
   function key(value) {
