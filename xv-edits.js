@@ -5,7 +5,7 @@
       grandparents: "Grandparents:",
       lines: [
         "Thomas and Patricia O'Brien",
-        "Jose Cuauhtemoc and Luz Maris Rivera"
+        "Jose Cuauhtemoc and Luz Maria Rivera"
       ],
       court: "Court:",
       courtLines: [
@@ -25,7 +25,7 @@
       grandparents: "Abuelos:",
       lines: [
         "Thomas y Patricia O'Brien",
-        "Jose Cuauhtemoc y Luz Maris Rivera"
+        "Jose Cuauhtemoc y Luz Maria Rivera"
       ],
       court: "Corte:",
       courtLines: [
