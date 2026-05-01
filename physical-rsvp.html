@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Physical RSVP | XV Chloe-Ann Rivera</title>
+  <script src="service-worker-cleanup.js?v=20260430-1"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #2d2527;
+      --muted: #75696c;
+      --rose: #9f5f70;
+      --rose-dark: #734251;
+      --paper: rgba(255, 255, 255, 0.92);
+      --line: rgba(115, 66, 81, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        linear-gradient(rgba(255, 248, 250, 0.74), rgba(255, 248, 250, 0.74)),
+        url("assets/images/rivera-16.jpeg") center / cover fixed;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    main {
+      width: min(100%, 460px);
+      padding: 30px 24px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 24px 70px rgba(45, 37, 39, 0.24);
+      text-align: center;
+      backdrop-filter: blur(6px);
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--rose-dark);
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      color: var(--rose-dark);
+      font-size: clamp(42px, 14vw, 72px);
+      font-weight: 400;
+      line-height: 0.95;
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+      text-align: left;
+    }
+
+    fieldset {
+      min-width: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    label,
+    .field-title {
+      display: block;
+      margin: 0 0 7px;
+      color: var(--rose-dark);
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    input {
+      width: 100%;
+      min-height: 48px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: 16px Arial, sans-serif;
+    }
+
+    .choice-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .choice {
+      position: relative;
+    }
+
+    .choice input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .choice span {
+      display: grid;
+      place-items: center;
+      min-height: 48px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--rose-dark);
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .choice input:checked + span {
+      border-color: var(--rose-dark);
+      background: var(--rose-dark);
+      color: #fff;
+    }
+
+    button {
+      width: 100%;
+      min-height: 50px;
+      margin-top: 4px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      background: var(--rose-dark);
+      color: #fff;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    button:disabled {
+      cursor: wait;
+      opacity: 0.72;
+    }
+
+    .status {
+      min-height: 24px;
+      margin: 18px 0 0;
+      color: var(--rose-dark);
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    @media (max-width: 420px) {
+      body {
+        padding: 18px;
+      }
+
+      main {
+        padding: 28px 18px;
+      }
+
+      .choice-group {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <p class="eyebrow">XV Chloe-Ann Rivera</p>
+    <h1>RSVP</h1>
+
+    <form id="physicalRsvpForm">
+      <div>
+        <label for="firstName">First name</label>
+        <input id="firstName" name="first_name" autocomplete="given-name" required>
+      </div>
+
+      <div>
+        <label for="lastName">Last name</label>
+        <input id="lastName" name="last_name" autocomplete="family-name" required>
+      </div>
+
+      <fieldset>
+        <legend class="field-title">Will you attend the XV?</legend>
+        <div class="choice-group">
+          <label class="choice">
+            <input type="radio" name="rsvp_status" value="Attending" required>
+            <span>Attending</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="rsvp_status" value="Not Attending" required>
+            <span>Not Attending</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <button id="submitPhysicalRsvp" type="submit">Send response</button>
+    </form>
+
+    <p id="physicalRsvpStatus" class="status" role="status" aria-live="polite"></p>
+  </main>
+
+  <script src="guest-api-config.js"></script>
+  <script src="language-toggle.js?v=20260501-1"></script>
+  <script src="physical-rsvp.js?v=20260501-2"></script>
+</body>
+
+</html>

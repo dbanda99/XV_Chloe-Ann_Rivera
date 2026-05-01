@@ -99,7 +99,11 @@
     "could not reach the rsvp service. please try again.": "No se pudo conectar con el servicio RSVP. Int\u00e9ntalo de nuevo.",
     "missing guest_api_url in guest-api-config.js": "Falta GUEST_API_URL en guest-api-config.js",
     "open rsvp page": "Abrir p\u00e1gina RSVP",
-    "view in english": "Ver en ingl\u00e9s"
+    "view in english": "Ver en ingl\u00e9s",
+    "first name": "Nombre",
+    "last name": "Apellido",
+    "send response": "Enviar respuesta",
+    "please complete all fields.": "Por favor completa todos los campos."
     ,"rsvp by may 25. please confirm your attendance and guest count through your invitation link.": "Confirma antes del 25 de mayo. Por favor confirma tu asistencia y cantidad de invitados desde el enlace de tu invitaci\u00f3n."
     ,"rsvp by may 25 with guest count, name, and phone number. father: joe c. rivera 956-898-2592. mother: diana l. rivera 956-231-7288. sister: ashley n. montemayor.": "Confirma antes del 25 de mayo. Por favor confirma tu asistencia y cantidad de invitados desde el enlace de tu invitaci\u00f3n."
     ,"made with \u2764\ufe0f for our guests": "Hecho con \u2764\ufe0f para nuestros invitados"
@@ -207,6 +211,10 @@
     "falta guest_api_url en guest-api-config.js": "Missing GUEST_API_URL in guest-api-config.js",
     "abrir p\u00e1gina rsvp": "Open RSVP page",
     "ver en espa\u00f1ol": "View in Spanish",
+    "nombre": "First name",
+    "apellido": "Last name",
+    "enviar respuesta": "Send response",
+    "por favor completa todos los campos.": "Please complete all fields.",
     "confirma antes del 25 de mayo. por favor confirma tu asistencia y cantidad de invitados desde el enlace de tu invitaci\u00f3n.": "RSVP by May 25. Please confirm your attendance and guest count through your invitation link.",
     "confirma tu asistencia antes del 25 de mayo con cantidad de invitados, nombre y tel\u00e9fono. padre: joe c. rivera 956-898-2592. madre: diana l. rivera 956-231-7288. hermana: ashley n. montemayor.": "RSVP by May 25. Please confirm your attendance and guest count through your invitation link.",
     "hecho con \u2764\ufe0f para nuestros invitados": "Made with \u2764\ufe0f for our guests",
