@@ -86,6 +86,22 @@
     if (marker) marker.remove();
   }
 
+  function updatePresentationStartTime() {
+    const presentationTitle = Array.from(document.querySelectorAll("#Itinerario h3")).find((element) => {
+      return ["presentacion", "presentaciÃ³n", "presentation"].includes(normalizedText(element));
+    });
+    if (!presentationTitle) return;
+
+    const card = presentationTitle.closest(".grid");
+    const time = card && Array.from(card.querySelectorAll("h3")).find((element) => {
+      return normalizedText(element) === "8:30 p.m.";
+    });
+
+    if (time) {
+      time.textContent = " 8:00 p.m. ";
+    }
+  }
+
   function updateCourtOfHonor() {
     const heading = findElementByText("h1, h2, h3", ["Family and Court", "Familia y corte"]);
     if (!heading) return;
@@ -198,6 +214,7 @@
 
   function applyEdits() {
     removeReceptionFromItinerary();
+    updatePresentationStartTime();
     updateCourtOfHonor();
     centerRiveraSeven();
     removeNoChildrenNotice();
