@@ -24410,7 +24410,7 @@ see https://add-to-calendar-button.com for details.
           }), bu(), wu(14, "div", 12), fy(15, "RusticLoveUp", 13), bu(), wu(16, "div", 14), fy(17, "RusticLoveDown", 13), bu()()()()();
         }
         L5 & 2 && (iM(12), Jm("src", s5.currentImage(), nM), iM(3), Jm("colorFondo", "text-primary-500")("colorSombra", "rgba(0, 0, 0, 0.5)"), iM(2), Jm("colorFondo", "text-primary-500")("colorSombra", "rgba(0, 0, 0, 0.5)"));
-      }, dependencies: [g6, h3], styles: [".carousel-btn[_ngcontent-%COMP%]{position:absolute;top:50%;transform:translateY(-50%);background-color:#00000080;border:none;padding:4px;border-radius:100%;color:#fff;font-size:14px;cursor:pointer}.carousel-btn[_ngcontent-%COMP%]:hover{color:#000}.left-0[_ngcontent-%COMP%]{left:10px}.right-0[_ngcontent-%COMP%]{right:10px}.blur[_ngcontent-%COMP%]{filter:blur(8px)}.bg-cover[_ngcontent-%COMP%]{background-size:cover}.bg-center[_ngcontent-%COMP%]{background-position:center}.relative[_ngcontent-%COMP%]{position:relative}"] })), _a51);
+      }, dependencies: [g6, h3], styles: [".carousel-btn[_ngcontent-%COMP%]{position:absolute;top:50%;transform:translateY(-50%);background-color:rgba(209,168,159,.9);border:none;padding:4px;border-radius:100%;color:#fff;font-size:14px;cursor:pointer}.carousel-btn[_ngcontent-%COMP%]:hover{color:#000}@media (max-width:640px){.carousel-btn[_ngcontent-%COMP%]{transform:translateY(-50%) scale(1.5);transform-origin:center}}.left-0[_ngcontent-%COMP%]{left:10px}.right-0[_ngcontent-%COMP%]{right:10px}.blur[_ngcontent-%COMP%]{filter:blur(8px)}.bg-cover[_ngcontent-%COMP%]{background-size:cover}.bg-center[_ngcontent-%COMP%]{background-position:center}.relative[_ngcontent-%COMP%]{position:relative}"] })), _a51);
     }
   });
 
